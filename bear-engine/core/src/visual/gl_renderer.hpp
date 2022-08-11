@@ -175,6 +175,9 @@ namespace bear
       /** \brief Tells if the window has been initialized. */
       bool m_video_mode_is_set;
 
+      /** \brief Tells if rendering is paused. */
+      bool m_paused;
+
       /** \brief The next elements to render. */
       state_list m_states;
       state_list m_previous_states;

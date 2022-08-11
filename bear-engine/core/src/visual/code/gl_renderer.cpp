@@ -503,12 +503,24 @@ void bear::visual::gl_renderer::set_background_color( const color_type& c )
 
 void bear::visual::gl_renderer::pause()
 {
+  boost::mutex::scoped_lock states_lock( m_mutex.loop_state );
+
+  if ( m_paused )
+    return;
+
   m_mutex.gl_access.lock();
+  m_paused = true;
 }
 
 void bear::visual::gl_renderer::unpause()
 {
+  boost::mutex::scoped_lock states_lock( m_mutex.loop_state );
+
+  if ( !m_paused )
+    return;
+
   m_mutex.gl_access.unlock();
+  m_paused = false;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -972,6 +984,7 @@ bear::visual::gl_renderer::gl_renderer()
     m_viewport_size( m_view_size ),
     m_fullscreen( false ),
     m_video_mode_is_set( false ),
+    m_paused( false ),
     m_render_ready( false ),
     m_draw( nullptr ),
     m_capture_queue( nullptr )
