@@ -16,6 +16,8 @@
 #include "net/connection_task.hpp"
 #include "net/message/message.hpp"
 
+using namespace boost::placeholders;
+
 /*----------------------------------------------------------------------------*/
 /**
  * \brief Constructor.

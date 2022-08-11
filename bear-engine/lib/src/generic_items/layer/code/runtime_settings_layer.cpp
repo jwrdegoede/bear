@@ -23,8 +23,10 @@
 #include <claw/multi_type_map_visitor.hpp>
 #include <claw/string_algorithm.hpp>
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include <boost/function.hpp>
+
+using namespace boost::placeholders;
 
 /*----------------------------------------------------------------------------*/
 /**

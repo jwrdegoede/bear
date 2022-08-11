@@ -15,9 +15,11 @@
 
 #include "engine/variable/type_to_string.hpp"
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include <boost/spirit/include/classic.hpp>
 #include <claw/logger.hpp>
+
+using namespace boost::placeholders;
 
 /*----------------------------------------------------------------------------*/
 /**

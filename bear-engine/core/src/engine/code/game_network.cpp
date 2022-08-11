@@ -16,6 +16,8 @@
 #include "engine/network/client_connection.hpp"
 #include "engine/network/message/sync.hpp"
 
+using namespace boost::placeholders;
+
 /*----------------------------------------------------------------------------*/
 /**
  * \brief Constructor.

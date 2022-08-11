@@ -16,7 +16,9 @@
 #include "gui/callback_function.hpp"
 #include "gui/radio_button.hpp"
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
+
+using namespace boost::placeholders;
 
 /*----------------------------------------------------------------------------*/
 /**

@@ -17,7 +17,9 @@
 #include "engine/level_globals.hpp"
 #include "engine/transition_effect/transition_effect.hpp"
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
+
+using namespace boost::placeholders;
 
 /*----------------------------------------------------------------------------*/
 /**

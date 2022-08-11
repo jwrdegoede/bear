@@ -17,7 +17,10 @@
 #include "engine/model/model_mark_placement.hpp"
 #include "engine/model/model_snapshot.hpp"
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
+
+using namespace boost::placeholders;
+
 
 /*----------------------------------------------------------------------------*/
 /**

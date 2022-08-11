@@ -18,7 +18,9 @@
 #include "bf/mark_placement.hpp"
 #include "bf/snapshot.hpp"
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
+
+using namespace boost::placeholders;
 
 /*----------------------------------------------------------------------------*/
 /**
