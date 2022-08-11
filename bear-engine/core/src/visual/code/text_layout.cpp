@@ -82,45 +82,43 @@ bear::visual::text_layout::compute_line_width( std::size_t first ) const
 
   size_type result(0);
   size_type candidate_length(0);
+  size_type width(0);
 
   // The line ends on the last space character such that the next word would not
   // fit on the line.
   std::string::size_type last_space_sequence( std::string::npos );
-  bool line_full(false);
 
-  while ( (last != text_length) && (m_text[last] != '\n') && !line_full )
-    if ( candidate_length > m_size.x )
-      line_full = true;
-    else
-      {
-        if ( m_text[last] == ' ' )
-          {
-            if ( last_space_sequence == std::string::npos )
-              {
-                last_space_sequence = last;
-                result = candidate_length;
-              }
-          }
-        else
-          last_space_sequence = std::string::npos;
-      
-        candidate_length += m_font.get_metrics( m_text[last] ).get_advance().x;
-        ++last;
-      }
+  while ( (last != text_length) && (m_text[last] != '\n') )
+    {
+      if ( m_text[last] == ' ' )
+        {
+          if ( last_space_sequence == std::string::npos )
+            {
+              last_space_sequence = last;
+              result = candidate_length;
+            }
+        }
+      else
+        last_space_sequence = std::string::npos;
+
+      width = m_font.get_metrics( m_text[last] ).get_advance().x;
+      if ( (candidate_length + width) > m_size.x )
+        break;
+
+      candidate_length += width;
+      ++last;
+    }
 
   // if we stopped in the middle of a word or at the end of the line, then we
   // must adjust the result from the candidate length.
   if ( last_space_sequence == std::string::npos )
     {
-      if ( (candidate_length <= m_size.x)
-           && ( (last == text_length) || !line_full ) )
+      // if we stopped at the end of line then the entire line fits
+      if ( (last == text_length) || (m_text[last] == '\n') )
         result = candidate_length;
-      else if ( (result == 0) && (candidate_length > 0) )
-        {
-          result =
-            candidate_length
-            - m_font.get_metrics( m_text[ last ] ).get_advance().x;
-        }
+      // else if we did not find a space to break at, use whatever fits
+      else if ( result == 0 )
+        result = candidate_length;
     }
 
   CLAW_POSTCOND( result >= 0 );
