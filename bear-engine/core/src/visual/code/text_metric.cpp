@@ -30,10 +30,10 @@ bear::visual::text_metric::text_metric( const std::string& text, const font& f )
 {
   const size_type height( text.length() * f.get_line_spacing() );
   const size_type max_size( std::numeric_limits<size_type>::max() );
+  const size_box_type s( max_size, height );
 
   text_layout_display_size func( text, f, height );
-  text_layout layout
-    ( f, text, size_box_type( max_size, height ), text_align::align_left );
+  text_layout layout( f, text, s, text_align::align_left );
 
   layout.arrange_text<text_layout_display_size&>( func );
 
